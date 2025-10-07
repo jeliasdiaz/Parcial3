@@ -1,39 +1,44 @@
-package parcial3.service;
+
+// Implementación del clasificador de pacientes. Gestiona las colas de prioridad y la lógica de clasificación.
+package parcial3.Service;
 
 import java.util.PriorityQueue;
-import parcial3.Model.Paciente;
-import parcial3.util.PuntosPaciente;
 
-public class ClasificadorPacientes {
+import parcial3.Iface.IClasificadorPacientes;
+import parcial3.Model.Paciente;
+import parcial3.Util.PuntosPaciente;
+
+public class ClasificadorPacientes implements IClasificadorPacientes {
+    // Cola de pacientes de alta prioridad
     private PriorityQueue<Paciente> colaAlta;
+    // Cola de pacientes de media prioridad
     private PriorityQueue<Paciente> colaMedia;
+    // Cola de pacientes de baja prioridad
     private PriorityQueue<Paciente> colaBaja;
 
+    // Constructor. Inicializa las colas de prioridad
     public ClasificadorPacientes() {
-        // Inicializar las colas con el comparador natural de Paciente
         colaAlta = new PriorityQueue<>();
         colaMedia = new PriorityQueue<>();
         colaBaja = new PriorityQueue<>();
     }
 
+    // Clasifica un paciente en la cola correspondiente según sus puntos
     public void clasificarPaciente(Paciente paciente) {
-        // Calcular puntos totales del paciente
         int puntos = PuntosPaciente.calcularPuntosTotales(paciente);
         paciente.setPuntosPrioridad(puntos);
-
-        // Clasificar en la cola correspondiente según los puntos
-        if (puntos >= 300) { // Si tiene 3 o más condiciones de alta prioridad
+        if (puntos >= 300) {
             colaAlta.offer(paciente);
-        } else if (puntos >= 150) { // Si tiene 3 o más condiciones de media prioridad
+        } else if (puntos >= 150) {
             colaMedia.offer(paciente);
         } else {
             colaBaja.offer(paciente);
         }
     }
 
+    // Atiende al siguiente paciente según la prioridad (alta, luego media, luego
+    // baja)
     public Paciente atenderSiguientePaciente() {
-        // Implementar la lógica del ciclo 3-2-1
-        // Esta implementación básica solo retorna el siguiente paciente de mayor prioridad
         if (!colaAlta.isEmpty()) {
             return colaAlta.poll();
         } else if (!colaMedia.isEmpty()) {
@@ -45,23 +50,28 @@ public class ClasificadorPacientes {
     }
 
     // Getters para las colas
+    // Devuelve la cola de alta prioridad
     public PriorityQueue<Paciente> getColaAlta() {
         return colaAlta;
     }
 
+    // Devuelve la cola de media prioridad
     public PriorityQueue<Paciente> getColaMedia() {
         return colaMedia;
     }
 
+    // Devuelve la cola de baja prioridad
     public PriorityQueue<Paciente> getColaBaja() {
         return colaBaja;
     }
 
     // Métodos para verificar si hay pacientes en espera
+    // Indica si hay pacientes en espera en alguna cola
     public boolean hayPacientesEnEspera() {
         return !colaAlta.isEmpty() || !colaMedia.isEmpty() || !colaBaja.isEmpty();
     }
 
+    // Devuelve el total de pacientes en espera
     public int getTotalPacientesEnEspera() {
         return colaAlta.size() + colaMedia.size() + colaBaja.size();
     }
