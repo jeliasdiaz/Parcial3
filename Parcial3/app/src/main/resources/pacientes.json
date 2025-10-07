@@ -1,0 +1,136 @@
+[
+    {
+        "id": "P1",
+        "edad": 72,
+        "antecedentes": [
+            "hipertensión",
+            "diabetes tipo 2"
+        ],
+        "dolencias": [
+            "dolor torácico",
+            "dificultad respiratoria"
+        ],
+        "signosVitales": {
+            "frecuenciaCardiaca": 95,
+            "presionArterial": "180/100",
+            "saturacionOxigeno": 89,
+            "temperatura": 37.2
+        },
+        "nivelDolor": 8,
+        "factoresSociales": [
+            "vive solo",
+            "mayor de 70 años"
+        ]
+    },
+    {
+        "id": "P2",
+        "edad": 35,
+        "antecedentes": [
+            "ninguno"
+        ],
+        "dolencias": [
+            "fiebre persistente",
+            "dolor de cabeza"
+        ],
+        "signosVitales": {
+            "frecuenciaCardiaca": 88,
+            "presionArterial": "120/80",
+            "saturacionOxigeno": 96,
+            "temperatura": 39.2
+        },
+        "nivelDolor": 6,
+        "factoresSociales": [
+            "acompañado"
+        ]
+    },
+    {
+        "id": "P3",
+        "edad": 5,
+        "antecedentes": [
+            "ninguno"
+        ],
+        "dolencias": [
+            "trauma craneoencefálico",
+            "sangrado leve"
+        ],
+        "signosVitales": {
+            "frecuenciaCardiaca": 100,
+            "presionArterial": "90/60",
+            "saturacionOxigeno": 98,
+            "temperatura": 36.8
+        },
+        "nivelDolor": 7,
+        "factoresSociales": [
+            "menor de edad",
+            "sin acompañante"
+        ]
+    },
+    {
+        "id": "P4",
+        "edad": 60,
+        "antecedentes": [
+            "diabetes",
+            "hipertensión"
+        ],
+        "dolencias": [
+            "dolor abdominal fuerte",
+            "náuseas"
+        ],
+        "signosVitales": {
+            "frecuenciaCardiaca": 82,
+            "presionArterial": "140/90",
+            "saturacionOxigeno": 93,
+            "temperatura": 37.8
+        },
+        "nivelDolor": 7,
+        "factoresSociales": [
+            "acompañado",
+            "apoyo familiar"
+        ]
+    },
+    {
+        "id": "P5",
+        "edad": 25,
+        "antecedentes": [
+            "ninguno"
+        ],
+        "dolencias": [
+            "dolor de cabeza leve",
+            "mareos"
+        ],
+        "signosVitales": {
+            "frecuenciaCardiaca": 75,
+            "presionArterial": "120/80",
+            "saturacionOxigeno": 99,
+            "temperatura": 36.5
+        },
+        "nivelDolor": 3,
+        "factoresSociales": [
+            "acompañado"
+        ]
+    },
+    {
+        "id": "P6",
+        "edad": 40,
+        "antecedentes": [
+            "cáncer en tratamiento",
+            "anemia"
+        ],
+        "dolencias": [
+            "dificultad respiratoria",
+            "dolor torácico",
+            "tos persistente"
+        ],
+        "signosVitales": {
+            "frecuenciaCardiaca": 110,
+            "presionArterial": "110/70",
+            "saturacionOxigeno": 85,
+            "temperatura": 38.5
+        },
+        "nivelDolor": 9,
+        "factoresSociales": [
+            "acompañado",
+            "apoyo familiar"
+        ]
+    }
+]
