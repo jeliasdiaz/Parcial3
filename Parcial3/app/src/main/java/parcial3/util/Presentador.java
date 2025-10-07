@@ -89,7 +89,6 @@ public class Presentador {
         int total = alta + media + baja;
         System.out.println(SEPARADOR);
         System.out.println("ESTADÍSTICAS FINALES");
-        System.out.println(SEPARADOR);
         System.out.printf("Total de pacientes atendidos: %d%n", total);
         System.out.printf("Pacientes de alta prioridad: %d (%.1f%%)%n", 
             alta, (alta * 100.0) / total);
