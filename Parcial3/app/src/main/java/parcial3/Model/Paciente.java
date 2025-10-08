@@ -96,11 +96,12 @@ public class Paciente implements Comparable<Paciente> {
     // Permite comparar pacientes por prioridad y nivel de dolor (para ordenar en
     // las colas)
     @Override
-    public int compareTo(Paciente otro) {
-        int comparacionPrioridad = Integer.compare(otro.getPuntosPrioridad(), this.getPuntosPrioridad());
+    public int compareTo(Paciente otroPaciente) {
+        int comparacionPrioridad = Integer.compare(otroPaciente.getPuntosPrioridad(), this.getPuntosPrioridad());
         if (comparacionPrioridad != 0) {
             return comparacionPrioridad;
         }
-        return Integer.compare(otro.getNivelDolor(), this.getNivelDolor());
+        comparacionPrioridad = Integer.compare(otroPaciente.getEdad(), this.getEdad());
+        return comparacionPrioridad;
     }
 }

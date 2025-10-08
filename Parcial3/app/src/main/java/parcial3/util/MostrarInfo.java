@@ -1,6 +1,11 @@
-
-// Clase utilitaria para mostrar el estado de las colas y simular la atención de pacientes.
 package parcial3.Util;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartUtils;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.category.DefaultCategoryDataset;
+import java.io.File;
+// Clase utilitaria para mostrar el estado de las colas y simular la atención de pacientes.
 
 import parcial3.Model.Paciente;
 import parcial3.Service.ClasificadorPacientes;
@@ -64,18 +69,19 @@ public class MostrarInfo {
             informacionSalida.append(String.format("Ciclo de atención #%d%n", ciclo++));
             informacionSalida.append("-".repeat(30)).append("\n");
 
-            // Calcula turnos proporcionales según colas no vacías
+            // Calcula turnos proporcionales según colas no vacías (sin ternarios)
             int totalTurnos = 6;
-            int alta = !clasificador.getColaAlta().isEmpty() ? 3 : 0;
-            int media = !clasificador.getColaMedia().isEmpty() ? 2 : 0;
-            int baja = !clasificador.getColaBaja().isEmpty() ? 1 : 0;
-            int suma = alta + media + baja;
+            int alta = 0, media = 0, baja = 0;
+            if (!clasificador.getColaAlta().isEmpty()) alta = 3;
+            if (!clasificador.getColaMedia().isEmpty()) media = 2;
+            if (!clasificador.getColaBaja().isEmpty()) baja = 1;
+            int sumaEspacios = alta + media + baja;
             // Si alguna cola está vacía, redistribuir turnos
-            if (suma < totalTurnos && suma > 0) {
-                int faltan = totalTurnos - suma;
-                if (alta > 0) alta += (int)Math.round(faltan * (3.0/6));
-                if (media > 0) media += (int)Math.round(faltan * (2.0/6));
-                if (baja > 0) baja += (int)Math.round(faltan * (1.0/6));
+            if (sumaEspacios < totalTurnos && sumaEspacios > 0) {
+                int turnosPorAsignar = totalTurnos - sumaEspacios;
+                if (alta > 0) alta += (int)Math.round(turnosPorAsignar * (3.0/6));
+                if (media > 0) media += (int)Math.round(turnosPorAsignar * (2.0/6));
+                if (baja > 0) baja += (int)Math.round(turnosPorAsignar * (1.0/6));
             }
 
             // Atiende pacientes de alta prioridad
@@ -109,6 +115,12 @@ public class MostrarInfo {
 
         informacionSalida.append(mostrarEstadisticas(pacientesAtendidosAlta, pacientesAtendidosMedia, pacientesAtendidosBaja));
 
+    // Llamar a los métodos de GraficarInfo para los gráficos y la tabla
+    GraficarInfo.generarGraficoBarras(pacientesAtendidosAlta, pacientesAtendidosMedia, pacientesAtendidosBaja);
+    GraficarInfo.generarGraficoPastel(pacientesAtendidosAlta, pacientesAtendidosMedia, pacientesAtendidosBaja);
+    GraficarInfo.generarGraficoLineasTiempos(pacientesAtendidos, tiemposEspera);
+    GraficarInfo.mostrarTablaPacientes(pacientesAtendidos, tiemposEspera);
+
     // Muestra el paciente con mayor tiempo de espera
         if (!pacientesAtendidos.isEmpty()) {
             long maxEspera = -1;
@@ -125,6 +137,27 @@ public class MostrarInfo {
             }
         }
         return informacionSalida.toString();
+    }
+
+    // Genera un gráfico de barras con los totales por prioridad y lo guarda como PNG
+    private static void generarGraficoBarras(int alta, int media, int baja) {
+        try {
+            DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+            dataset.addValue(alta, "Pacientes", "Alta");
+            dataset.addValue(media, "Pacientes", "Media");
+            dataset.addValue(baja, "Pacientes", "Baja");
+
+            JFreeChart barChart = ChartFactory.createBarChart(
+                "Pacientes Atendidos por Prioridad",
+                "Prioridad",
+                "Cantidad",
+                dataset
+            );
+            File outputFile = new File("reporte_grafico.png");
+            ChartUtils.saveChartAsPNG(outputFile, barChart, 600, 400);
+        } catch (Exception e) {
+            System.err.println("Error generando gráfico: " + e.getMessage());
+        }
     }
 
     // Devuelve un string con la información de la atención de un paciente
