@@ -21,7 +21,7 @@ public class MostrarInfo {
     public static String mostrarEstadoColas(ClasificadorPacientes clasificador) {
         StringBuilder informacionSalida = new StringBuilder();
         informacionSalida.append(SEPARADOR);
-        informacionSalida.append("ESTADO ACTUAL DE LAS COLAS DE ATENCIÓN\n");
+        informacionSalida.append("ESTADO ACTUAL DE LAS COLAS DE ATENCION\n");
         informacionSalida.append(SEPARADOR);
 
         informacionSalida.append(mostrarCola("COLA ALTA PRIORIDAD", clasificador.getColaAlta()));
@@ -53,7 +53,7 @@ public class MostrarInfo {
     public static String simularAtencion(ClasificadorPacientes clasificador) {
         StringBuilder informacionSalida = new StringBuilder();
         informacionSalida.append(SEPARADOR);
-        informacionSalida.append("SIMULACIÓN DE PROCESO DE ATENCIÓN\n");
+        informacionSalida.append("SIMULACION DE PROCESO DE ATENCION\n");
         informacionSalida.append(SEPARADOR);
 
         int ciclo = 1;

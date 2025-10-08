@@ -4,8 +4,8 @@ package parcial3;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import parcial3.Service.LectorPacientes;
 import parcial3.Service.ClasificadorPacientes;
+import parcial3.Service.LectorPacientes;
 import parcial3.Util.MostrarInfo;
 import java.io.IOException;
 
