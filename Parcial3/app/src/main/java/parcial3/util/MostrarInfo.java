@@ -38,8 +38,8 @@ public class MostrarInfo {
             for (Paciente paciente : pacientes) {
                 dolenciasTexto = concatenarTexto(paciente.getDolencias());
                 informacionSalida.append(String.format("ID: %s | Edad: %d | Dolor: %d | Dolencias: %s%n",
-                    paciente.getId(), paciente.getEdad(), paciente.getNivelDolor(),
-                    dolenciasTexto));
+                        paciente.getId(), paciente.getEdad(), paciente.getNivelDolor(),
+                        dolenciasTexto));
             }
         }
         informacionSalida.append("\n");
@@ -58,7 +58,8 @@ public class MostrarInfo {
         return texto.toString();
     }
 
-    // Simula el proceso de atención de pacientes y devuelve el resultado como string
+    // Simula el proceso de atención de pacientes y devuelve el resultado como
+    // string
     public static String simularAtencion(ClasificadorPacientes clasificador) {
         StringBuilder informacionSalida = new StringBuilder();
         informacionSalida.append(SEPARADOR);
@@ -81,16 +82,22 @@ public class MostrarInfo {
             // Calcula turnos proporcionales según colas no vacías (sin ternarios)
             int totalTurnos = 6;
             int alta = 0, media = 0, baja = 0;
-            if (!clasificador.getColaAlta().isEmpty()) alta = 3;
-            if (!clasificador.getColaMedia().isEmpty()) media = 2;
-            if (!clasificador.getColaBaja().isEmpty()) baja = 1;
+            if (!clasificador.getColaAlta().isEmpty())
+                alta = 3;
+            if (!clasificador.getColaMedia().isEmpty())
+                media = 2;
+            if (!clasificador.getColaBaja().isEmpty())
+                baja = 1;
             int sumaEspacios = alta + media + baja;
             // Si alguna cola está vacía, redistribuir turnos
             if (sumaEspacios < totalTurnos && sumaEspacios > 0) {
                 int turnosPorAsignar = totalTurnos - sumaEspacios;
-                if (alta > 0) alta += (int)Math.round(turnosPorAsignar * (3.0/6));
-                if (media > 0) media += (int)Math.round(turnosPorAsignar * (2.0/6));
-                if (baja > 0) baja += (int)Math.round(turnosPorAsignar * (1.0/6));
+                if (alta > 0)
+                    alta += (int) Math.round(turnosPorAsignar * (3.0 / 6));
+                if (media > 0)
+                    media += (int) Math.round(turnosPorAsignar * (2.0 / 6));
+                if (baja > 0)
+                    baja += (int) Math.round(turnosPorAsignar * (1.0 / 6));
             }
 
             // Atiende pacientes de alta prioridad
@@ -122,15 +129,10 @@ public class MostrarInfo {
             informacionSalida.append("\n");
         }
 
-        informacionSalida.append(mostrarEstadisticas(pacientesAtendidosAlta, pacientesAtendidosMedia, pacientesAtendidosBaja));
+        informacionSalida
+                .append(mostrarEstadisticas(pacientesAtendidosAlta, pacientesAtendidosMedia, pacientesAtendidosBaja));
 
-    // Llamar a los métodos de GraficarInfo para los gráficos y la tabla
-    GraficarInfo.generarGraficoBarras(pacientesAtendidosAlta, pacientesAtendidosMedia, pacientesAtendidosBaja);
-    GraficarInfo.generarGraficoPastel(pacientesAtendidosAlta, pacientesAtendidosMedia, pacientesAtendidosBaja);
-    GraficarInfo.generarGraficoLineasTiempos(pacientesAtendidos, tiemposEspera);
-    GraficarInfo.mostrarTablaPacientes(pacientesAtendidos, tiemposEspera);
-
-    // Muestra el paciente con mayor tiempo de espera
+        // Muestra el paciente con mayor tiempo de espera
         if (!pacientesAtendidos.isEmpty()) {
             long maxEspera = -1;
             Paciente pacienteMax = null;
@@ -142,19 +144,27 @@ public class MostrarInfo {
             }
             if (pacienteMax != null) {
                 informacionSalida.append("Paciente con mayor tiempo de espera antes de ser atendido:\n");
-                informacionSalida.append(String.format("ID: %s | Edad: %d | Espera: %.2f segundos\n", pacienteMax.getId(), pacienteMax.getEdad(), maxEspera/1000.0));
+                informacionSalida.append(String.format("ID: %s | Edad: %d | Espera: %.2f segundos\n",
+                        pacienteMax.getId(), pacienteMax.getEdad(), maxEspera / 1000.0));
             }
         }
+        // Llamar a los métodos de GraficarInfo para los gráficos y la tabla
+        GraficarInfo.generarGraficoBarras(pacientesAtendidosAlta, pacientesAtendidosMedia, pacientesAtendidosBaja);
+        GraficarInfo.generarGraficoPastel(pacientesAtendidosAlta, pacientesAtendidosMedia, pacientesAtendidosBaja);
+        GraficarInfo.generarGraficoLineasTiempos(pacientesAtendidos, tiemposEspera);
+        GraficarInfo.mostrarTablaPacientes(pacientesAtendidos, tiemposEspera);
         return informacionSalida.toString();
     }
 
     // Devuelve un string con la información de la atención de un paciente
     private static String mostrarAtencion(Paciente paciente, String prioridad) {
         StringBuilder informacionSalida = new StringBuilder();
-        informacionSalida.append(String.format("Atendiendo paciente %s (Prioridad: %s)%n", paciente.getId(), prioridad));
+        informacionSalida
+                .append(String.format("Atendiendo paciente %s (Prioridad: %s)%n", paciente.getId(), prioridad));
         informacionSalida.append(String.format("  Dolencias: %s%n", String.join(", ", paciente.getDolencias())));
         informacionSalida.append(String.format("  Antecedentes: %s%n", String.join(", ", paciente.getAntecedentes())));
-        informacionSalida.append(String.format("  Factores sociales: %s%n", String.join(", ", paciente.getFactoresSociales())));
+        informacionSalida
+                .append(String.format("  Factores sociales: %s%n", String.join(", ", paciente.getFactoresSociales())));
         informacionSalida.append("\n");
         return informacionSalida.toString();
     }
@@ -167,12 +177,12 @@ public class MostrarInfo {
         informacionSalida.append("ESTADÍSTICAS FINALES\n");
         informacionSalida.append(SEPARADOR);
         informacionSalida.append(String.format("Total de pacientes atendidos: %d%n", total));
-        informacionSalida.append(String.format("Pacientes de alta prioridad: %d (%.1f%%)%n", 
-            alta, (alta * 100.0) / total));
-        informacionSalida.append(String.format("Pacientes de media prioridad: %d (%.1f%%)%n", 
-            media, (media * 100.0) / total));
-        informacionSalida.append(String.format("Pacientes de baja prioridad: %d (%.1f%%)%n", 
-            baja, (baja * 100.0) / total));
+        informacionSalida.append(String.format("Pacientes de alta prioridad: %d (%.1f%%)%n",
+                alta, (alta * 100.0) / total));
+        informacionSalida.append(String.format("Pacientes de media prioridad: %d (%.1f%%)%n",
+                media, (media * 100.0) / total));
+        informacionSalida.append(String.format("Pacientes de baja prioridad: %d (%.1f%%)%n",
+                baja, (baja * 100.0) / total));
         informacionSalida.append(SEPARADOR);
         return informacionSalida.toString();
     }
