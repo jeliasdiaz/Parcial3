@@ -8,12 +8,22 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import javax.swing.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import parcial3.Model.Paciente;
 
 public class GraficarInfo {
+    private static final String IMAGENES_DIR = "C:\\Users\\diazm\\OneDrive\\Escritorio\\Parcial3\\Parcial3\\app\\imagenesReporte";
+    
+    private static void asegurarDirectorioExiste() {
+        File dir = new File(IMAGENES_DIR);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+    }
     public static void generarGraficoBarras(int alta, int media, int baja) {
         try {
+            asegurarDirectorioExiste();
             DefaultCategoryDataset dataset = new DefaultCategoryDataset();
             dataset.addValue(alta, "Pacientes", "Alta");
             dataset.addValue(media, "Pacientes", "Media");
@@ -25,7 +35,7 @@ public class GraficarInfo {
                 "Cantidad",
                 dataset
             );
-            File outputFile = new File("C:/Users/david/Documents/GitHub/Parcial3/Parcial3/app/imagenesReporte/reporte_grafico.png");
+            File outputFile = new File(IMAGENES_DIR, "reporte_grafico.png");
             ChartUtils.saveChartAsPNG(outputFile, barChart, 600, 400);
         } catch (Exception e) {
             System.err.println("Error generando gráfico: " + e.getMessage());
@@ -42,7 +52,7 @@ public class GraficarInfo {
                 "Proporción de Pacientes Atendidos por Prioridad",
                 dataset,
                 true, true, false);
-            File outputFile = new File("C:/Users/david/Documents/GitHub/Parcial3/Parcial3/app/imagenesReporte/reporte_pastel.png");
+            File outputFile = new File(IMAGENES_DIR, "reporte_pastel.png");
             ChartUtils.saveChartAsPNG(outputFile, pieChart, 600, 400);
         } catch (Exception e) {
             System.err.println("Error generando gráfico de pastel: " + e.getMessage());
@@ -65,7 +75,7 @@ public class GraficarInfo {
                 dataset,
                 PlotOrientation.VERTICAL,
                 true, true, false);
-            File outputFile = new File("C:/Users/david/Documents/GitHub/Parcial3/Parcial3/app/imagenesReporte/reporte_tiempos.png");
+            File outputFile = new File(IMAGENES_DIR, "reporte_tiempos.png");
             ChartUtils.saveChartAsPNG(outputFile, lineChart, 700, 400);
         } catch (Exception e) {
             System.err.println("Error generando gráfico de líneas: " + e.getMessage());
