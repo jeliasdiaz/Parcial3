@@ -25,7 +25,7 @@ public class GraficarInfo {
                 "Cantidad",
                 dataset
             );
-            File outputFile = new File("reporte_grafico.png");
+            File outputFile = new File("C:/Users/david/Documents/GitHub/Parcial3/Parcial3/app/imagenesReporte/reporte_grafico.png");
             ChartUtils.saveChartAsPNG(outputFile, barChart, 600, 400);
         } catch (Exception e) {
             System.err.println("Error generando gráfico: " + e.getMessage());
@@ -42,7 +42,7 @@ public class GraficarInfo {
                 "Proporción de Pacientes Atendidos por Prioridad",
                 dataset,
                 true, true, false);
-            File outputFile = new File("reporte_pastel.png");
+            File outputFile = new File("C:/Users/david/Documents/GitHub/Parcial3/Parcial3/app/imagenesReporte/reporte_pastel.png");
             ChartUtils.saveChartAsPNG(outputFile, pieChart, 600, 400);
         } catch (Exception e) {
             System.err.println("Error generando gráfico de pastel: " + e.getMessage());
@@ -65,7 +65,7 @@ public class GraficarInfo {
                 dataset,
                 PlotOrientation.VERTICAL,
                 true, true, false);
-            File outputFile = new File("reporte_tiempos.png");
+            File outputFile = new File("C:/Users/david/Documents/GitHub/Parcial3/Parcial3/app/imagenesReporte/reporte_tiempos.png");
             ChartUtils.saveChartAsPNG(outputFile, lineChart, 700, 400);
         } catch (Exception e) {
             System.err.println("Error generando gráfico de líneas: " + e.getMessage());

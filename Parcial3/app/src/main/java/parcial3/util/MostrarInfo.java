@@ -1,10 +1,5 @@
 package parcial3.Util;
 
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartUtils;
-import org.jfree.chart.JFreeChart;
-import org.jfree.data.category.DefaultCategoryDataset;
-import java.io.File;
 // Clase utilitaria para mostrar el estado de las colas y simular la atención de pacientes.
 
 import parcial3.Model.Paciente;
@@ -34,19 +29,33 @@ public class MostrarInfo {
     private static String mostrarCola(String titulo, PriorityQueue<Paciente> cola) {
         StringBuilder informacionSalida = new StringBuilder();
         List<Paciente> pacientes = new ArrayList<>(cola);
+        String dolenciasTexto;
         informacionSalida.append(titulo).append("\n");
         informacionSalida.append("-".repeat(30)).append("\n");
         if (pacientes.isEmpty()) {
             informacionSalida.append("(Vacía)\n");
         } else {
             for (Paciente paciente : pacientes) {
+                dolenciasTexto = concatenarTexto(paciente.getDolencias());
                 informacionSalida.append(String.format("ID: %s | Edad: %d | Dolor: %d | Dolencias: %s%n",
                     paciente.getId(), paciente.getEdad(), paciente.getNivelDolor(),
-                    String.join(", ", paciente.getDolencias())));
+                    dolenciasTexto));
             }
         }
         informacionSalida.append("\n");
         return informacionSalida.toString();
+    }
+
+    // Método auxiliar para construir texto de una lista sin usar String.join
+    private static String concatenarTexto(List<String> lista) {
+        StringBuilder texto = new StringBuilder();
+        for (int i = 0; i < lista.size(); i++) {
+            texto.append(lista.get(i));
+            if (i < lista.size() - 1) {
+                texto.append(", ");
+            }
+        }
+        return texto.toString();
     }
 
     // Simula el proceso de atención de pacientes y devuelve el resultado como string
@@ -137,27 +146,6 @@ public class MostrarInfo {
             }
         }
         return informacionSalida.toString();
-    }
-
-    // Genera un gráfico de barras con los totales por prioridad y lo guarda como PNG
-    private static void generarGraficoBarras(int alta, int media, int baja) {
-        try {
-            DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-            dataset.addValue(alta, "Pacientes", "Alta");
-            dataset.addValue(media, "Pacientes", "Media");
-            dataset.addValue(baja, "Pacientes", "Baja");
-
-            JFreeChart barChart = ChartFactory.createBarChart(
-                "Pacientes Atendidos por Prioridad",
-                "Prioridad",
-                "Cantidad",
-                dataset
-            );
-            File outputFile = new File("reporte_grafico.png");
-            ChartUtils.saveChartAsPNG(outputFile, barChart, 600, 400);
-        } catch (Exception e) {
-            System.err.println("Error generando gráfico: " + e.getMessage());
-        }
     }
 
     // Devuelve un string con la información de la atención de un paciente

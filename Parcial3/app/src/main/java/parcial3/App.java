@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 import parcial3.Service.LectorPacientes;
 import parcial3.Service.ClasificadorPacientes;
 import parcial3.Util.MostrarInfo;
-import java.io.IOException;
+
 
 public class App {
     // Logger para registrar información del sistema

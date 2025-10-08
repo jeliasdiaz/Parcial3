@@ -79,7 +79,7 @@ public class PuntosPaciente {
         } else if (paciente.getSignosVitales().getSaturacionOxigeno() >= 90 &&
                 paciente.getSignosVitales().getSaturacionOxigeno() <= 94 ||
                 paciente.getSignosVitales().getTemperatura() >= 38 &&
-                        paciente.getSignosVitales().getTemperatura() <= 39.9) {
+                paciente.getSignosVitales().getTemperatura() <= 39.9) {
             return PUNTOS_MEDIA;
         }
         return PUNTOS_BAJA;
