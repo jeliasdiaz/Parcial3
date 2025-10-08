@@ -38,7 +38,7 @@ public class LectorPacientes {
     // Logger para registrar información de carga
     private static final Logger logger = LogManager.getLogger(LectorPacientes.class);
     // Ruta del archivo JSON de pacientes
-    private static final String RUTA_JSON = "C:\\Users\\diazm\\OneDrive\\Escritorio\\Parcial3\\Parcial3\\app\\src\\main\\resources\\pacientes.json";
+    private static final String RUTA_JSON = "C:\\Users\\david\\Documents\\GitHub\\Parcial3\\Parcial3\\app\\src\\main\\resources\\pacientes.json";
     // Lista de pacientes leídos del archivo
     private static List<Paciente> pacientesLeidos = new ArrayList<>();
     // Indica si el archivo ya fue leído
